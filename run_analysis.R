@@ -1,25 +1,80 @@
 numberValuePattern <- "^([0-9]+) (.+)$"
-
-"
-  Create a list <featureVectorColumnIndexToFeatureName> where label is
-  <feature vector column index> and value is
-  <descriptive name of signal mean/std feature>
   
+featureNameToReadableName <- list(
+  "tBodyAcc-mean()-X" = "Body_Linear_Acceleration_Mean_X_Axis",
+  "tBodyAcc-mean()-Y" = "Body_Linear_Acceleration_Mean_Y_Axis",
+  "tBodyAcc-mean()-Z" = "Body_Linear_Acceleration_Mean_Z_Axis",
+  "tBodyAcc-std()-X" = "Body_Linear_Acceleration_Standard_Deviation_X_Axis",
+  "tBodyAcc-std()-Y" = "Body_Linear_Acceleration_Standard_Deviation_Y_Axis",
+  "tBodyAcc-std()-Z" = "Body_Linear_Acceleration_Standard_Deviation_Z_Axis",
+  "tGravityAcc-mean()-X" = "Gravity_Linear_Acceleration_Mean_X_Axis",
+  "tGravityAcc-mean()-Y" = "Gravity_Linear_Acceleration_Mean_Y_Axis",
+  "tGravityAcc-mean()-Z" = "Gravity_Linear_Acceleration_Mean_Z_Axis",
+  "tGravityAcc-std()-X" = "Gravity_Linear_Acceleration_Standard_Deviation_X_Axis",
+  "tGravityAcc-std()-Y" = "Gravity_Linear_Acceleration_Standard_Deviation_Y_Axis",
+  "tGravityAcc-std()-Z" = "Gravity_Linear_Acceleration_Standard_Deviation_Z_Axis",
+  "tBodyAccJerk-mean()-X" = "Body_Linear_Acceleration_Jerk_Mean_X_Axis",
+  "tBodyAccJerk-mean()-Y" = "Body_Linear_Acceleration_Jerk_Mean_Y_Axis",
+  "tBodyAccJerk-mean()-Z" = "Body_Linear_Acceleration_Jerk_Mean_Z_Axis",
+  "tBodyAccJerk-std()-X" = "Body_Linear_Acceleration_Jerk_Standard_Deviation_X_Axis",
+  "tBodyAccJerk-std()-Y" = "Body_Linear_Acceleration_Jerk_Standard_Deviation_Y_Axis",
+  "tBodyAccJerk-std()-Z" = "Body_Linear_Acceleration_Jerk_Standard_Deviation_Z_Axis",
+  "tBodyGyro-mean()-X" = "Body_Angular_Acceleration_Mean_X_Axis",
+  "tBodyGyro-mean()-Y" = "Body_Angular_Acceleration_Mean_Y_Axis",
+  "tBodyGyro-mean()-Z" = "Body_Angular_Acceleration_Mean_Z_Axis",
+  "tBodyGyro-std()-X" = "Body_Angular_Acceleration_Standard_Deviation_X_Axis",
+  "tBodyGyro-std()-Y" = "Body_Angular_Acceleration_Standard_Deviation_Y_Axis",
+  "tBodyGyro-std()-Z" = "Body_Angular_Acceleration_Standard_Deviation_Z_Axis",
+  "tBodyGyroJerk-mean()-X" = "Body_Angular_Acceleration_Jerk_Mean_X_Axis",
+  "tBodyGyroJerk-mean()-Y" = "Body_Angular_Acceleration_Jerk_Mean_Y_Axis",
+  "tBodyGyroJerk-mean()-Z" = "Body_Angular_Acceleration_Jerk_Mean_Z_Axis",
+  "tBodyGyroJerk-std()-X" = "Body_Angular_Acceleration_Jerk_Standard_Deviation_X_Axis",
+  "tBodyGyroJerk-std()-Y" = "Body_Angular_Acceleration_Jerk_Standard_Deviation_Y_Axis",
+  "tBodyGyroJerk-std()-Z" = "Body_Angular_Acceleration_Jerk_Standard_Deviation_Z_Axis",
+  "tBodyAccMag-mean()" = "Body_Linear_Acceleration_Magnitude_Mean",
+  "tBodyAccMag-std()" = "Body_Linear_Acceleration_Magnitude_Standard_Deviation",
+  "tGravityAccMag-mean()" = "Gravity_Linear_Acceleration_Magnitude_Mean",
+  "tGravityAccMag-std()" = "Gravity_Linear_Acceleration_Magnitude_Standard_Deviation",
+  "tBodyAccJerkMag-mean()" = "Body_Linear_Acceleration_Jerk_Magnitude_Mean",
+  "tBodyAccJerkMag-std()" = "Body_Linear_Acceleration_Jerk_Magnitude_Standard_Deviation",
+  "tBodyGyroMag-mean()" = "Body_Angular_Acceleration_Magnitude_Mean",
+  "tBodyGyroMag-std()" = "Body_Angular_Acceleration_Magnitude_Standard_Deviation",
+  "tBodyGyroJerkMag-mean()" = "Body_Angular_Acceleration_Jerk_Magnitude_Mean",
+  "tBodyGyroJerkMag-std()" = "Body_Angular_Acceleration_Jerk_Magnitude_Standard_Deviation",
+  "fBodyAcc-mean()-X" = "Frequency_Domain_Body_Linear_Acceleration_Mean_X_Axis",
+  "fBodyAcc-mean()-Y" = "Frequency_Domain_Body_Linear_Acceleration_Mean_Y_Axis",
+  "fBodyAcc-mean()-Z" = "Frequency_Domain_Body_Linear_Acceleration_Mean_Z_Axis",
+  "fBodyAcc-std()-X" = "Frequency_Domain_Body_Linear_Acceleration_Standard_Deviation_X_Axis",
+  "fBodyAcc-std()-Y" = "Frequency_Domain_Body_Linear_Acceleration_Standard_Deviation_Y_Axis",
+  "fBodyAcc-std()-Z" = "Frequency_Domain_Body_Linear_Acceleration_Standard_Deviation_Z_Axis",
+  "fBodyAccJerk-mean()-X" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Mean_X_Axis",
+  "fBodyAccJerk-mean()-Y" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Mean_Y_Axis",
+  "fBodyAccJerk-mean()-Z" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Mean_Z_Axis",
+  "fBodyAccJerk-std()-X" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Standard_Deviation_X_Axis",
+  "fBodyAccJerk-std()-Y" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Standard_Deviation_Y_Axis",
+  "fBodyAccJerk-std()-Z" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Standard_Deviation_Z_Axis",
+  "fBodyGyro-mean()-X" = "Frequency_Domain_Body_Angular_Acceleration_Mean_X_Axis",
+  "fBodyGyro-mean()-Y" = "Frequency_Domain_Body_Angular_Acceleration_Mean_Y_Axis",
+  "fBodyGyro-mean()-Z" = "Frequency_Domain_Body_Angular_Acceleration_Mean_Z_Axis",
+  "fBodyGyro-std()-X" = "Frequency_Domain_Body_Angular_Acceleration_Standard_Deviation_X_Axis",
+  "fBodyGyro-std()-Y" = "Frequency_Domain_Body_Angular_Acceleration_Standard_Deviation_Y_Axis",
+  "fBodyGyro-std()-Z" = "Frequency_Domain_Body_Angular_Acceleration_Standard_Deviation_Z_Axis",
+  "fBodyAccMag-mean()" = "Frequency_Domain_Body_Linear_Acceleration_Magnitude_Mean",
+  "fBodyAccMag-std()" = "Frequency_Domain_Body_Linear_Acceleration_Magnitude_Standard_Deviation",
+  "fBodyBodyAccJerkMag-mean()" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Magnitude_Mean",
+  "fBodyBodyAccJerkMag-std()" = "Frequency_Domain_Body_Linear_Acceleration_Jerk_Magnitude_Standard_Deviation",
+  "fBodyBodyGyroMag-mean()" = "Frequency_Domain_Body_Angular_Acceleration_Magnitude_Mean",
+  "fBodyBodyGyroMag-std()" = "Frequency_Domain_Body_Angular_Acceleration_Magnitude_Standard_Deviation",
+  "fBodyBodyGyroJerkMag-mean()" = "Frequency_Domain_Body_Angular_Acceleration_Jerk_Magnitude_Mean",
+  "fBodyBodyGyroJerkMag-std()" = "Frequency_Domain_Body_Angular_Acceleration_Jerk_Magnitude_Standard_Deviation"
+)
+
 "
   ## for line in features.txt
   ## separate into <number> <featureName>
   ## if <featureName> has mean() or std(), add the number and featureName to the list
-  ## TODO: in phase 2, do transformations:
-    ## make the feature name lowercase
-    ## featureName will take the form <t/f><body/gravity><gyro/acc><jerk>?<mag>?<-mean/std()>(-<X/Y/Z>)?
-    ## <t/f> -> <""/"Frequency_">
-    ## <body/gravity> -> <"Body_"/"Gravity_">
-    ## <gyro/acc> -> <"Angular_Acceleration_"/"Linear_Acceleration_">
-    ## <jerk> -> <"Jerk_">
-    ## <mag> -> <"Magnitude_">
-    ## <mean()/std()> -> <"Mean"/"Standard_Deviation">
-    ## <X/Y/Z> -> _X / _Y / _Z
-featureVectorColumnIndexToFeatureName <- list()
+"
+featureVectorColumnIndexToReadableFeatureName <- list()
 con <- file("data/raw/UCI HAR Dataset/features.txt")
 features <- readLines(con, 561)
 close.connection(con)
@@ -32,8 +87,8 @@ for (line in features) {
   number <- matches[[1]][[2]]
   name <- matches[[1]][[3]]
   ## save only those features containing mean() or std() in the name
-  if (grepl(meanOrStdPattern, name)) {
-    featureVectorColumnIndexToFeatureName[[number]] <- name
+  if (!is.null(featureNameToReadableName[[name]])) {
+    featureVectorColumnIndexToReadableFeatureName[[number]] <- featureNameToReadableName[[name]]
   }
 }
 
@@ -79,22 +134,17 @@ con <- file("data/raw/UCI HAR Dataset/test/subject_test.txt")
 subjectTest <- readLines(con)
 close.connection(con)
 
-## TODO: I could refactor the script in an r-like manner, so it does this:
-  ## 1- Filter out all columns in xTrain by whether or not they are features we want
-  ## 2- add yTrain and subjectTrain as columns to xTrain
-  ## 3- transform yTrain to use reader-friendly activity labels
-  ## 4- Repeat the above 3 steps for the test files
-  ## 5- add all rows in xTest to xTrain
-
 addDatasetToObservations <- function(observations, xTable, yList, subjectList) {
+  ## look at each record
   for (recordIndex in 1:nrow(xTable)) {
     observations$Subject <- c(observations$Subject, subjectList[[recordIndex]])
     activity <- activityNumberToName[[
       yList[[recordIndex]]
     ]]
     observations$Activity <- c(observations$Activity, activity)
-    for (columnIndex in names(featureVectorColumnIndexToFeatureName)) {
-      featureName <- featureVectorColumnIndexToFeatureName[[as.character(columnIndex)]]
+    ## add all mean/sd features
+    for (columnIndex in names(featureVectorColumnIndexToReadableFeatureName)) {
+      featureName <- featureVectorColumnIndexToReadableFeatureName[[as.character(columnIndex)]]
       featureValue <- xTable[[recordIndex, as.numeric(columnIndex)]]
       observations[[featureName]] <- c(observations[[featureName]], featureValue)
     }
@@ -112,9 +162,20 @@ if (file.exists(tidyFile)) {
 file.create(tidyFile)
 write.csv(measurementFeatures, tidyFile)
 
-## create new data frame measurementFeatureMeansForSubjectDoingActivity
-  ## columns are: Activity, Subject, (Mean_<Feature Name> for feature in measurementFeatures.csv)
-## TODO: first come up with new naming convention for columns in first data set
+## make data set containing the average observational mean for each feature by subject/activity
 
-## delete measurementFeatureMeansForSubjectDoingActivity.csv if it exists
-## save measurementFeatureMeansForSubjectDoingActivity to measurementFeatureMeansForSubjectDoingActivity.csv
+## get new feature names
+readableFeatureNames <- lapply(
+  names(measurementFeatures)[-(1:2)],
+  function(featureName) { return(paste("Mean_", featureName, sep = "")) }
+)
+measurementFeaturesBySubjectActivity <- group_by(measurementFeatures, Subject, Activity)
+measurementFeaturesBySubjectActivity <- summarize_all(measurementFeaturesBySubjectActivity, mean)
+names(measurementFeaturesBySubjectActivity)[-(1:2)] <- readableFeatureNames ## replace feature names
+
+tidyFile <- "data/tidy/measurementFeaturesBySubjectActivity.csv"
+if (file.exists(tidyFile)) {
+  file.remove(tidyFile)
+}
+file.create(tidyFile)
+write.csv(measurementFeaturesBySubjectActivity, tidyFile)
