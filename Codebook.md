@@ -104,4 +104,4 @@ Each record in this dataset represents a combination of activity and subject in 
   - Subject - Same as in `measurementFeatures.txt`
   - Each other column in this file is "Mean_", followed by the name of one of the 
 variables in `measurementFeatures.txt`. It represents the mean of the variable across
-all observations of subject <subject> doing activity <activity> in `measurementFeatures.txt`.
+all observations of subject <subject> doing activity <activity> in `measurementFeatures.txt`. The units are the same.
