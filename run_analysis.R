@@ -159,12 +159,12 @@ addDatasetToObservations <- function(observations, xTable, yList, subjectList) {
 observations <- addDatasetToObservations(list(), xTrain, yTrain, subjectTrain)
 observations <- addDatasetToObservations(observations, xTest, yTest, subjectTest)
 measurementFeatures <- data.frame(observations)
-tidyFile <- "data/tidy/measurementFeatures.csv"
+tidyFile <- "data/tidy/measurementFeatures.txt"
 if (file.exists(tidyFile)) {
   file.remove(tidyFile)
 }
 file.create(tidyFile)
-write.csv(measurementFeatures, tidyFile)
+write.table(measurementFeatures, tidyFile, row.names = FALSE)
 
 "
   make data set containing the average observational mean for each feature
@@ -180,9 +180,9 @@ measurementFeaturesBySubjectActivity <- group_by(measurementFeatures, Subject, A
 measurementFeaturesBySubjectActivity <- summarize_all(measurementFeaturesBySubjectActivity, mean)
 names(measurementFeaturesBySubjectActivity)[-(1:2)] <- readableFeatureNames ## replace feature names
 
-tidyFile <- "data/tidy/measurementFeaturesBySubjectActivity.csv"
+tidyFile <- "data/tidy/measurementFeaturesBySubjectActivity.txt"
 if (file.exists(tidyFile)) {
   file.remove(tidyFile)
 }
 file.create(tidyFile)
-write.csv(measurementFeaturesBySubjectActivity, tidyFile)
+write.table(measurementFeaturesBySubjectActivity, tidyFile, row.names=FALSE)

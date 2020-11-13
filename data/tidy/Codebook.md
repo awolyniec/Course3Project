@@ -3,7 +3,7 @@ Partial subset of original data, as well as some summary statistics
 
 ## Files
 
-#### 1- `measurementFeatures.csv`
+#### 1- `measurementFeatures.txt`
 
 This file contains a partial subset of the data in `data/raw/UCI HAR Dataset`. The
 original data contained a number of inertial signals (linear acceleration, angular
@@ -93,15 +93,15 @@ Each record in this dataset represents one record in the original dataset.
   | Frequency_Domain_Body_Angular_Acceleration_Jerk_Magnitude_Mean | fBodyBodyGyroJerkMag-mean() | s^3/r | | |
   | Frequency_Domain_Body_Angular_Acceleration_Jerk_Magnitude_Standard_Deviation | fBodyBodyGyroJerkMag-std() | s^3/r | | |
 
-#### 2- `measurementFeaturesBySubjectActivity.csv`
+#### 2- `measurementFeaturesBySubjectActivity.txt`
 
-This file contains the mean of every feature value in `measurementFeatures.csv`, over all
+This file contains the mean of every feature value in `measurementFeatures.txt`, over all
 observations of a given subject doing a given activity (so, 1 WALKING, 1 LAYING, 2 WALKING, 2 LAYING, etc...).
 
 Each record in this dataset represents a combination of activity and subject in the original dataset.
 
-  - Activity - Same as in `measurementFeatures.csv`
-  - Subject - Same as in `measurementFeatures.csv`
+  - Activity - Same as in `measurementFeatures.txt`
+  - Subject - Same as in `measurementFeatures.txt`
   - Each other column in this file is "Mean_", followed by the name of one of the 
-variables in `measurementFeatures.csv`. It represents the mean of the variable across
-all observations of subject <subject> doing activity <activity> in `measurementFeatures.csv`.
+variables in `measurementFeatures.txt`. It represents the mean of the variable across
+all observations of subject <subject> doing activity <activity> in `measurementFeatures.txt`.
