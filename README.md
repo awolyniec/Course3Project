@@ -1,5 +1,6 @@
-# Course 3 Project Scripts
+# Course 3 Project
 
+Scripts
 ### 1- run_analysis.R
 Run to create two tidy datasets from the raw data. Two files are generated:
 1- `data/tidy/measurementFeatures.txt`
