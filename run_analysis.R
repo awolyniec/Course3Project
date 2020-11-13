@@ -1,5 +1,12 @@
+library(dplyr)
+
+## ===========================
+## HELPER VARIABLES
+## ===========================
+
 numberValuePattern <- "^([0-9]+) (.+)$"
   
+## for the measurement features dataset
 featureNameToReadableName <- list(
   "tBodyAcc-mean()-X" = "Body_Linear_Acceleration_Mean_X_Axis",
   "tBodyAcc-mean()-Y" = "Body_Linear_Acceleration_Mean_Y_Axis",
@@ -69,10 +76,13 @@ featureNameToReadableName <- list(
   "fBodyBodyGyroJerkMag-std()" = "Frequency_Domain_Body_Angular_Acceleration_Jerk_Magnitude_Standard_Deviation"
 )
 
+## ===========================
+## SCRIPT
+## ===========================
+
 "
-  ## for line in features.txt
-  ## separate into <number> <featureName>
-  ## if <featureName> has mean() or std(), add the number and featureName to the list
+  Create a list mapping column index in feature vector to readable feature name
+  for the measurement features dataset
 "
 featureVectorColumnIndexToReadableFeatureName <- list()
 con <- file("data/raw/UCI HAR Dataset/features.txt")
@@ -110,13 +120,8 @@ for (line in activityLabels) {
 }
 
 " 
-  Initialize a data frame <measurementMeansAndSds> containing the following columns:
-  Subject, Activity, ...all descriptive signal mean/std feature names
-  
-  Each row is one record from the training and test datasets. All records from
-  the training and test datasets are included.
+  Create the measurement features dataset 
 "
-## training data
 xTrain <- read.table("data/raw/UCI HAR Dataset/train/X_train.txt")
 con <- file("data/raw/UCI HAR Dataset/train/y_train.txt")
 yTrain <- readLines(con)
@@ -125,7 +130,6 @@ con <- file("data/raw/UCI HAR Dataset/train/subject_train.txt")
 subjectTrain <- readLines(con)
 close.connection(con)
 
-## test data
 xTest <- read.table("data/raw/UCI HAR Dataset/test/X_test.txt")
 con <- file("data/raw/UCI HAR Dataset/test/y_test.txt")
 yTest <- readLines(con)
@@ -162,7 +166,10 @@ if (file.exists(tidyFile)) {
 file.create(tidyFile)
 write.csv(measurementFeatures, tidyFile)
 
-## make data set containing the average observational mean for each feature by subject/activity
+"
+  make data set containing the average observational mean for each feature
+  by subject-activity combination
+"
 
 ## get new feature names
 readableFeatureNames <- lapply(
